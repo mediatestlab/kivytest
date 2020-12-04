@@ -4,6 +4,8 @@ from kivy.properties import NumericProperty, ReferenceListProperty, ObjectProper
 from kivy.vector import Vector
 from kivy.clock import Clock
 from random import randint
+from kivy.uix.label import Label
+from kivy.core.window import Window
 
 
 class PongPaddle(Widget):
@@ -33,7 +35,7 @@ class PongGame(Widget):
     player1 = ObjectProperty(None)
     player2 = ObjectProperty(None)
 
-    def serve_ball(self, vel=(4, 0)):
+    def serve_ball(self, vel=(8, 0)):
         def direction():
             side = randint(0, 1)
             if side == 0:
@@ -73,6 +75,8 @@ class PongGame(Widget):
 
 class PongApp(App):
     def build(self):
+        # window_sizes = Window.size
+        # return Label(text="screen sizes= "+str(window_sizes))
         game = PongGame()
         game.serve_ball()
         Clock.schedule_interval(game.update, 1.0/60.0)
